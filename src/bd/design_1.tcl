@@ -810,6 +810,9 @@ proc create_root_design { parentCell } {
 
   # Create instance: subset_converter_reset, and set properties
   set subset_converter_reset [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 subset_converter_reset ]
+  set_property -dict [ list \
+   CONFIG.CONST_WIDTH {1} \
+ ] $subset_converter_reset
 
   # Create instance: v_axi4s_vid_out_0, and set properties
   set v_axi4s_vid_out_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_axi4s_vid_out:4.0 v_axi4s_vid_out_0 ]
@@ -862,6 +865,12 @@ proc create_root_design { parentCell } {
   set_property -dict [ list \
    CONFIG.NUM_PORTS {5} \
  ] $xlconcat_0
+
+  # Create instance: xlconstant_0, and set properties
+  set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
+  set_property -dict [ list \
+   CONFIG.CONST_WIDTH {5} \
+ ] $xlconstant_0
 
   # Create interface connections
   connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_pins axi_interconnect_gp0/S00_AXI] [get_bd_intf_pins processing_system7_0/M_AXI_GP0]
